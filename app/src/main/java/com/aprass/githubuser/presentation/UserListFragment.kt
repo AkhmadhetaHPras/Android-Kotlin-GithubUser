@@ -1,7 +1,6 @@
-package com.aprass.githubuser.view
+package com.aprass.githubuser.presentation
 
 import android.os.Bundle
-import android.text.style.TtsSpan.ARG_USERNAME
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aprass.githubuser.R
 import com.aprass.githubuser.databinding.FragmentUserListBinding
-import com.aprass.githubuser.utils.Utils
-import com.aprass.githubuser.viewmodel.DetailViewModel
+import com.aprass.githubuser.utils.UIState
 
 class UserListFragment : Fragment() {
 
@@ -42,30 +40,30 @@ class UserListFragment : Fragment() {
         binding.rvConnection.addItemDecoration(itemDecoration)
 
         detailViewModel.isLoading.observe(viewLifecycleOwner) {
-            Utils.showLoading(it, binding.progressBar)
+            UIState.showLoading(it, binding.progressBar)
         }
 
         detailViewModel.listFollowers.observe(viewLifecycleOwner) { githubUser ->
             if (githubUser.isEmpty()) {
-                binding.errorResult.text = "No Followers"
+                binding.errorResult.text = getString(R.string.no_followers)
                 binding.rvConnection.visibility = View.GONE
                 binding.errorResult.visibility = View.VISIBLE
             } else {
                 binding.errorResult.visibility = View.GONE
                 binding.rvConnection.visibility = View.VISIBLE
-                Utils.setUserData(githubUser, binding.rvConnection, requireActivity())
+                UIState.setUserData(githubUser, binding.rvConnection, this)
             }
         }
 
         detailViewModel.listFollowing.observe(viewLifecycleOwner) { githubUser ->
             if (githubUser.isEmpty()) {
-                binding.errorResult.text = "No Following"
+                binding.errorResult.text = getString(R.string.no_following)
                 binding.rvConnection.visibility = View.GONE
                 binding.errorResult.visibility = View.VISIBLE
             } else {
                 binding.errorResult.visibility = View.GONE
                 binding.rvConnection.visibility = View.VISIBLE
-                Utils.setUserData(githubUser, binding.rvConnection, requireActivity())
+                UIState.setUserData(githubUser, binding.rvConnection, this)
             }
         }
 

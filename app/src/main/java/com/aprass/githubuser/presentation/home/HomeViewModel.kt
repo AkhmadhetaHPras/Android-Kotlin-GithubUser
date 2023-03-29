@@ -1,18 +1,18 @@
-package com.aprass.githubuser.viewmodel
+package com.aprass.githubuser.presentation.home
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aprass.githubuser.api.ApiConfig
-import com.aprass.githubuser.model.GithubUserResponse
-import com.aprass.githubuser.model.User
-import com.aprass.githubuser.model.UserItem
+import com.aprass.githubuser.source.networking.ApiConfig
+import com.aprass.githubuser.source.networking.model.GithubUserResponse
+import com.aprass.githubuser.source.networking.model.User
+import com.aprass.githubuser.source.networking.model.UserItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val _listGithubUser = MutableLiveData<List<UserItem>>()
     val listGithubUser: LiveData<List<UserItem>> = _listGithubUser

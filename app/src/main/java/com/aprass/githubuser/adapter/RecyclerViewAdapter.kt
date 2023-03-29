@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aprass.githubuser.databinding.ItemUserBinding
-import com.aprass.githubuser.model.UserItem
+import com.aprass.githubuser.source.networking.model.UserItem
 import com.bumptech.glide.Glide
 
 class RecyclerViewAdapter(private val listUser: List<UserItem>) :

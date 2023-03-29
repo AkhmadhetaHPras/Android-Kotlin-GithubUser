@@ -1,8 +1,8 @@
-package com.aprass.githubuser.api
+package com.aprass.githubuser.source.networking
 
-import com.aprass.githubuser.model.GithubUserResponse
-import com.aprass.githubuser.model.User
-import com.aprass.githubuser.model.UserItem
+import com.aprass.githubuser.source.networking.model.GithubUserResponse
+import com.aprass.githubuser.source.networking.model.User
+import com.aprass.githubuser.source.networking.model.UserItem
 import retrofit2.Call
 import retrofit2.http.*
 

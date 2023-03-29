@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        buildConfigField("String", "KEY", '"token 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"')
+        buildConfigField("String", "KEY", '"token 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"')
         buildConfigField("String", "BASE_URL", '"https://api.github.com/"')
         applicationId "com.aprass.githubuser"
         minSdk 24
@@ -54,4 +54,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.activity:activity-ktx:1.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+
+//    datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 }

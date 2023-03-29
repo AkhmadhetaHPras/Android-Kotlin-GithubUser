@@ -1,4 +1,4 @@
-package com.aprass.githubuser.model
+package com.aprass.githubuser.source.networking.model
 
 import com.google.gson.annotations.SerializedName
 
