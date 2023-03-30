@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aprass.githubuser.source.networking.ApiConfig
-import com.aprass.githubuser.source.networking.model.User
-import com.aprass.githubuser.source.networking.model.UserItem
+import com.aprass.githubuser.source.data.networking.ApiConfig
+import com.aprass.githubuser.source.data.networking.model.User
+import com.aprass.githubuser.source.data.networking.model.UserItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

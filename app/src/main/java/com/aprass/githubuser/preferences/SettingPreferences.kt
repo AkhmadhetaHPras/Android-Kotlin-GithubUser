@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.map
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
     private val THEME_KEY = booleanPreferencesKey("theme_setting")
+    private val FIRST_LAUNCH = booleanPreferencesKey("first_launch")
 
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
@@ -21,6 +22,18 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         dataStore.edit { preferences ->
             preferences[THEME_KEY] = isDarkModeActive
+        }
+    }
+
+    fun getIsFirstLaunch(): Flow<Boolean> {
+        return dataStore.data.map { preferences ->
+            preferences[FIRST_LAUNCH] ?: true
+        }
+    }
+
+    suspend fun saveFirstLaunch(isFirstLaunch: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[FIRST_LAUNCH] = isFirstLaunch
         }
     }
 

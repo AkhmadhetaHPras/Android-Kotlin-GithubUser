@@ -11,9 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aprass.githubuser.databinding.ActivityMainBinding
-import com.aprass.githubuser.utils.UIState.hideBottomNav
 import com.aprass.githubuser.utils.UIState.observeTheme
-import com.aprass.githubuser.utils.UIState.showBottomNav
+import com.aprass.githubuser.utils.UIState.updateBottomNav
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -25,11 +24,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        observeTheme(dataStore, this)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         settingBottomNav()
     }
 
@@ -40,9 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener {_, destination, _ ->
             when(destination.id) {
-                R.id.detailFragment -> hideBottomNav(binding)
+                R.id.detailFragment -> updateBottomNav(binding, false)
                 else -> {
-                    showBottomNav(binding)
+                    updateBottomNav(binding, true)
                 }
             }
         }

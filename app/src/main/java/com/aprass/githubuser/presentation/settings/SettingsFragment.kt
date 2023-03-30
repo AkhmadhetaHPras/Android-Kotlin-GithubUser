@@ -12,6 +12,7 @@ import com.aprass.githubuser.R
 import com.aprass.githubuser.dataStore
 import com.aprass.githubuser.databinding.FragmentSettingsBinding
 import com.aprass.githubuser.preferences.SettingPreferences
+import com.aprass.githubuser.presentation.ViewModelFactory
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsFragment : Fragment() {

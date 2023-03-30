@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.aprass.githubuser.R
 import com.aprass.githubuser.adapter.SectionsPagerAdapter
 import com.aprass.githubuser.databinding.FragmentDetailBinding
-import com.aprass.githubuser.source.networking.model.User
+import com.aprass.githubuser.source.data.networking.model.User
 import com.aprass.githubuser.utils.UIState
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout

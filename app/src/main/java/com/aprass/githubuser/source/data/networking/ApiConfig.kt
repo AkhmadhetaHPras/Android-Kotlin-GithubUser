@@ -1,4 +1,4 @@
-package com.aprass.githubuser.source.networking
+package com.aprass.githubuser.source.data.networking
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
