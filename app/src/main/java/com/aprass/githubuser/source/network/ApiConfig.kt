@@ -1,4 +1,4 @@
-package com.aprass.githubuser.source.data.networking
+package com.aprass.githubuser.source.network
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -7,7 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.aprass.githubuser.BuildConfig
 
-//seharusnya singleton
 class ApiConfig {
     companion object {
         fun getApiService(): ApiService {

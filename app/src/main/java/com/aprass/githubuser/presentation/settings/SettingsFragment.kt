@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.aprass.githubuser.R
 import com.aprass.githubuser.dataStore
 import com.aprass.githubuser.databinding.FragmentSettingsBinding
-import com.aprass.githubuser.preferences.SettingPreferences
 import com.aprass.githubuser.presentation.ViewModelFactory
 import com.google.android.material.switchmaterial.SwitchMaterial
 
@@ -33,11 +32,11 @@ class SettingsFragment : Fragment() {
 
         val switchTheme = view.findViewById<SwitchMaterial>(R.id.switch_theme)
 
-        val pref = SettingPreferences.getInstance(requireActivity().dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
-            SettingViewModel::class.java
-        )
-        settingViewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
+        val factory: ViewModelFactory =
+            ViewModelFactory.getInstance(requireActivity(), requireActivity().dataStore)
+        val viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
+
+        viewModel.getThemeSettings().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 switchTheme.isChecked = true
@@ -48,7 +47,7 @@ class SettingsFragment : Fragment() {
         }
 
         switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            settingViewModel.saveThemeSetting(isChecked)
+            viewModel.saveThemeSetting(isChecked)
         }
     }
 }

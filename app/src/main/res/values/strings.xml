@@ -11,16 +11,23 @@
     <string name="number">37</string>
     <string name="tab_text_2">Following</string>
     <string name="tab_text_1">Followers</string>
-    <string name="default_username">akhmad</string>
+    <string name="default_username">akhmadhetahpras</string>
     <string name="location">location</string>
-    <string name="title_favorites">Favoite</string>
+    <string name="title_favorites">Favorite</string>
     <string name="title_home">Home</string>
     <string name="title_settings">Setting</string>
     <string name="title_detail">Detail User</string>
     <string name="title_user_list">User List</string>
     <string name="dark_mode">Dark Mode</string>
-    <string name="no_data">No Data</string>
+    <string name="no_data">Oops, No Data</string>
     <string name="no_followers">No Followers</string>
     <string name="no_following">No Following</string>
     <string name="by_developer">by Akhmadheta Hafid Prasetyawan</string>
+    <string name="explore_github_user">Explore Github User</string>
+    <string name="github_logo">github logo</string>
+    <string name="find_your_favorite_user">Find Your Favorite User</string>
+    <string name="favorite_button">favorite button</string>
+    <string name="header_fav">Some People You Might Know</string>
+    <string name="addfavsuccess">Successfully added to Favorites</string>
+    <string name="removefavsuccess">Successfully removed from Favorites</string>
 </resources>

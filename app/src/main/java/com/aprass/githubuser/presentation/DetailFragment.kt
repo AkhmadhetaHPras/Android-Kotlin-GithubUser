@@ -1,28 +1,35 @@
 package com.aprass.githubuser.presentation
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.aprass.githubuser.R
 import com.aprass.githubuser.adapter.SectionsPagerAdapter
+import com.aprass.githubuser.dataStore
 import com.aprass.githubuser.databinding.FragmentDetailBinding
-import com.aprass.githubuser.source.data.networking.model.User
+import com.aprass.githubuser.presentation.favorite.FavoriteViewModel
+import com.aprass.githubuser.source.Result
+import com.aprass.githubuser.source.local.entity.UserEntity
+import com.aprass.githubuser.source.network.model.User
 import com.aprass.githubuser.utils.UIState
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val detailViewModel: DetailViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,17 +43,60 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        val username: String = arguments?.getString(USERNAME) ?: ""
-        sectionsPagerAdapter.username = username
-
-        detailViewModel.isLoading.observe(viewLifecycleOwner) {
-            UIState.showLoading(it, view.findViewById(R.id.progressBar))
+        val user: UserEntity? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable(USER, UserEntity::class.java)
+        } else {
+            arguments?.getParcelable(USER)
         }
-        detailViewModel.profile.observe(viewLifecycleOwner) { profile ->
-            setProfile(profile)
-        }
+        sectionsPagerAdapter.username = user?.username ?: getString(R.string.default_username)
 
-        detailViewModel.getProfile(username)
+        val factory: ViewModelFactory =
+            ViewModelFactory.getInstance(requireActivity(), requireActivity().dataStore)
+        val viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
+
+        val favViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
+
+        viewModel.getProfile(user?.username ?: getString(R.string.default_username))
+            .observe(viewLifecycleOwner) { result ->
+                if (result != null) {
+                    when (result) {
+                        is Result.Loading -> {
+                            UIState.showLoading(true, requireView().findViewById(R.id.progressBar))
+                        }
+                        is Result.Success -> {
+                            UIState.showLoading(false, requireView().findViewById(R.id.progressBar))
+                            setProfile(result.data)
+                        }
+                        is Result.Error -> {
+                            UIState.showLoading(false, requireView().findViewById(R.id.progressBar))
+                            Toast.makeText(
+                                context,
+                                "Terjadi kesalahan" + result.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
+
+        viewModel.isFavorite(user?.username ?: getString(R.string.default_username))
+            .observe(viewLifecycleOwner) { result ->
+                if (result.favorite) {
+                    view.findViewById<FloatingActionButton>(R.id.fav_detail).apply {
+                        imageTintList= ColorStateList.valueOf(Color.parseColor("#D26161"))
+                        setOnClickListener{
+                            favViewModel.updateFavorite(result, false)
+                        }
+                    }
+                } else {
+                    view.findViewById<FloatingActionButton>(R.id.fav_detail).apply {
+                        imageTintList= ColorStateList.valueOf(Color.parseColor("#FFFFFF"))
+                        setOnClickListener{
+                            favViewModel.updateFavorite(result, true)
+                        }
+                    }
+                }
+            }
 
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
@@ -78,7 +128,7 @@ class DetailFragment : Fragment() {
     }
 
     companion object {
-        const val USERNAME = "username"
+        const val USER = "user"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(

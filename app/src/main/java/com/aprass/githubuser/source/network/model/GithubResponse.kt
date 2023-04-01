@@ -1,4 +1,4 @@
-package com.aprass.githubuser.source.data.networking.model
+package com.aprass.githubuser.source.network.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,9 +21,6 @@ data class UserItem(
 
 	@field:SerializedName("avatar_url")
 	val avatar: String,
-
-	@field:SerializedName("url")
-	val url: String,
 
 	var name: String,
 )

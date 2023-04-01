@@ -11,7 +11,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.aprass.githubuser.databinding.ActivityMainBinding
-import com.aprass.githubuser.utils.UIState.observeTheme
 import com.aprass.githubuser.utils.UIState.updateBottomNav
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

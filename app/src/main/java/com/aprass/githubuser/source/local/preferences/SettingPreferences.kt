@@ -1,4 +1,4 @@
-package com.aprass.githubuser.preferences
+package com.aprass.githubuser.source.local.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

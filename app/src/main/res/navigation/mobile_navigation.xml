@@ -11,6 +11,9 @@
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorite">
         <action
+            android:id="@+id/action_favFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
             android:id="@+id/action_favorite_to_home"
             app:destination="@id/navigation_home"
             app:popUpTo="@id/navigation_home"
