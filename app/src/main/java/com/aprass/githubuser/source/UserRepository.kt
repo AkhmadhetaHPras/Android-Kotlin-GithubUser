@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.aprass.githubuser.source.local.entity.UserEntity
+import com.aprass.githubuser.source.local.room.UserDao
 import com.aprass.githubuser.source.network.ApiService
 import com.aprass.githubuser.source.network.model.User
-import com.dicoding.newsapp.data.local.room.UserDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

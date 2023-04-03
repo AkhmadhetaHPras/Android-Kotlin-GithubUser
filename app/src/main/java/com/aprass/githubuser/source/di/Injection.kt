@@ -5,8 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.aprass.githubuser.source.UserRepository
 import com.aprass.githubuser.source.local.preferences.SettingPreferences
+import com.aprass.githubuser.source.local.room.UserDatabase
 import com.aprass.githubuser.source.network.ApiConfig
-import com.dicoding.newsapp.data.local.room.UserDatabase
 
 object Injection {
 
